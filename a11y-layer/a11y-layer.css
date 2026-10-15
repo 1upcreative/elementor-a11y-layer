@@ -1,0 +1,59 @@
+/*
+ * Accessibility Layer styles. Printed inline after Elementor's CSS, so plain selectors win
+ * without !important. Placeholders in capitals are filled from the settings; each
+ * "@feature" block is dropped when that fix is turned off.
+ */
+
+/* @feature landmark */
+/* Skip-link target: no focus box around the whole page when the skip link lands. */
+#__MAIN_ID__:focus { outline: none; box-shadow: none; }
+/* @end */
+
+/* @feature headings */
+/* Headings moved up a level to keep the outline in order keep their old size. */
+/* __SIZES__ */
+/* @end */
+
+/* @feature link_underline */
+/* Links inside running text are underlined, so color is not the only clue. */
+main .elementor-widget-text-editor p a,
+main .elementor-widget-text-editor li a,
+main .elementor-widget-theme-post-content p a,
+main .elementor-widget-theme-post-content li a { text-decoration: underline; text-underline-offset: 2px; }
+/* @end */
+
+/* @feature focus_ring */
+/* Visible keyboard focus everywhere (some Elementor widgets remove it). Two tones, a light halo
+   inside a dark ring, so it shows on white pages and dark bars alike. */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+	outline: 3px solid __RING__;
+	outline-offset: 2px;
+	box-shadow: 0 0 0 2px __HALO__;
+}
+#__MAIN_ID__:focus-visible { outline: none; box-shadow: none; }
+
+/* Elementor mega menu: the open/close button has no visible size, so the visible menu item
+   shows the ring instead. */
+.e-n-menu-title:has(.e-n-menu-dropdown-icon:focus-visible) {
+	outline: 3px solid __RING__;
+	outline-offset: 2px;
+	box-shadow: 0 0 0 2px __HALO__;
+}
+/* @end */
+
+/* @feature reflow */
+/* Reflow at 320px (WCAG 1.4.10): a word too long for the screen (an email, a link) wraps instead
+   of pushing the page sideways. Only on narrow screens, so desktop type is untouched. */
+@media (max-width: 480px) {
+	body { overflow-wrap: break-word; }
+	/* Premium Addons Google Reviews: arrows sit outside the slider; tuck them inside the edge. */
+	.elementor-widget-premium-google-reviews a.carousel-arrow.carousel-next { right: 0; }
+	.elementor-widget-premium-google-reviews a.carousel-arrow.carousel-prev { left: 0; }
+}
+/* @end */
+
+/* @feature tables */
+/* Header cells made from bold cells keep the left alignment they had. */
+.__PREFIX__-th { text-align: start; }
+/* @end */
